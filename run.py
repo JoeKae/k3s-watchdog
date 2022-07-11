@@ -1,6 +1,6 @@
 import subprocess
 cmdpipe = subprocess.Popen(
-    "kubectl get pods -n kube-system | grep CrashLoopBackOff",
+    "/usr/local/binkubectl get pods -n kube-system | grep CrashLoopBackOff",
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
     shell=False)
