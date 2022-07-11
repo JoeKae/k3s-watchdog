@@ -6,8 +6,6 @@ output = subprocess.check_output(
 ).decode()
 result = {}
 for row in output.splitlines():
-    # if 'CrashLoopBackOff' in row:
-    #     print(row)
-    #     print("restart")
-    print(row)
+    if 'CrashLoopBackOff' in row:
+        print("restart")
 
