@@ -1,9 +1,9 @@
 import subprocess
 cmdpipe = subprocess.Popen(
-    "/usr/local/bin/kubectl get pods -n kube-system | grep CrashLoopBackOff",
+    "kubectl get pods -n kube-system | grep CrashLoopBackOff",
     stdout=subprocess.PIPE,
     stderr=subprocess.PIPE,
-    shell=False)
+    shell=True)
 result = {}
 for row in cmdpipe.stdout.readline():
     if 'CrashLoopBackOff' in row:
