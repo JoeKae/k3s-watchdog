@@ -53,6 +53,7 @@ class WatchDog:
             seconds=300,
             next_run_time=datetime.now()
         )
+        task_scheduler.start()
 
 
 WatchDog.run()
