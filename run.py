@@ -1,15 +1,15 @@
-from kubernetes import client, config, watch
+import subprocess
+cmdpipe = subprocess.Popen(
+    "kubectl get pods -n kube-system | grep CrashLoopBackOff",
+    stdout=subprocess.PIPE,
+    stderr=subprocess.PIPE,
+    shell=False)
+result = {}
+for row in cmdpipe.stdout.readline():
+    if 'CrashLoopBackOff' in row:
+        print(row)
+        print("restart")
 
-# Configs can be set in Configuration class directly or using helper utility
-# config.load_kube_config()
-
-v1 = client.CoreV1Api()
-count = 10
-w = watch.Watch()
-for event in w.stream(v1.list_namespace, _request_timeout=60):
-    print("Event: %s %s" % (event['type'], event['object'].metadata.name))
-    count -= 1
-    if not count:
-        w.stop()
-
-print("Ended.")
+# You need to close the file handles, as they will stay open "forever" otherwise.
+cmdpipe.stdout.close()
+cmdpipe.stderr.close()
