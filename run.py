@@ -1,15 +1,12 @@
 import subprocess
-cmdpipe = subprocess.Popen(
-    "kubectl get pods -n kube-system | grep CrashLoopBackOff",
-    stdout=subprocess.PIPE,
-    stderr=subprocess.PIPE,
-    shell=True)
+
+output = subprocess.check_output(
+    "kubectl get pods -n kube-system | grep CrashLoopBackOff"
+).decode()
 result = {}
-for row in cmdpipe.stdout.readline():
+for row in output.splitlines():
     # if 'CrashLoopBackOff' in row:
     #     print(row)
     #     print("restart")
     print(row)
-# You need to close the file handles, as they will stay open "forever" otherwise.
-cmdpipe.stdout.close()
-cmdpipe.stderr.close()
+
