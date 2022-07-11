@@ -1,0 +1,10 @@
+[Unit]
+Description=K3S Watchdog
+Wants=k3s.service
+After=k3s.service
+
+[Service]
+ExecStart=/path/to/venv/bin/python /path/to/k3s-watchdog/watchdog.py
+
+[Install]
+WantedBy=multi-user.target
