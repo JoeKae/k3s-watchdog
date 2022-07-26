@@ -50,7 +50,7 @@ class WatchDog:
         task_scheduler.add_job(
             WatchDog.check,
             'interval',
-            seconds=300,
+            seconds=900,
             next_run_time=datetime.now()
         )
         task_scheduler.start()
